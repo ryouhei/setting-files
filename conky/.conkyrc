@@ -1,0 +1,79 @@
+update_interval 5
+alignment middle_right
+background yes
+double_buffer yes
+total_run_times 0
+
+stippled_borders 0
+border_width 2
+default_color grey
+default_outline_color white
+default_shade_color grey
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+gap_x 40
+gap_y 40
+minimum_size 250 500
+maximum_width 1000
+cpu_avg_samples 2
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+
+own_window yes
+own_window_class Conky
+own_window_transparent yes
+own_window_type desktop
+#own_window_type dock
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+stippled_borders 0
+uppercase no
+use_spacer right
+mpd_host 0.0.0.0
+mpd_port 6600
+use_xft yes
+#xftfont Courier 10 Pitch 426:size=8
+xftfont VL Gothic:size=8
+xftalpha 0.8
+# fef7b2 e18522}
+# stuff after 'TEXT' will be formatted on screen
+TEXT
+
+${if_running audacious}${font Arial:size=9}${color #e43526}Audacioous ${audacious_status}${color DarkSlateGray}${hr 2}${font}
+${color #597DB2}Title  : ${color grey}${scroll 15 3 ${audacious_title 100}} ${color #597DB2}${alignc}${audacious_bar 5 5}${endif}
+ 
+${font Arial:size=9}${color #e43526}System ${color DarkSlateGray}${hr 2}${font}
+${color #597DB2}Kernel  : ${color grey}$kernel ${color #597DB2}${alignr}Uptime: ${color grey}$uptime
+${color #597DB2}Host     : ${color grey}${nodename}${color #597DB2}${alignr}${time %Y.%m.%d}    ${color grey}${time %H:%M}${color}
+${color #597DB2}CPU      : ${color grey}${freq}MHz${alignr}$cpu% ${color #597DB2}${cpugraph 6,150 000000 0000ff}
+${color #597DB2}RAM     : ${color grey}$memmax${alignr}$memperc% ${color #597DB2}${membar 6,150}
+${color #597DB2}Processor temperature: $color${acpitemp}°C ${color #597DB2}${alignr}Battery: $color ${battery}
+
+${font Arial:size=9}${color #e43526}Disk ${color DarkSlateGray}${hr 2}${font}
+${color #597DB2}/   ${alignr}:  ${color grey}${fs_size /}     ${fs_used_perc /}% ${color #597DB2}${fs_bar 6,150 /}
+${color #597DB2}/home   ${alignr}:  ${color grey}${fs_size /home}     ${fs_used_perc /home}% ${color #597DB2}${fs_bar 6,150 /home}
+
+${font Arial:size=9}${color #e43526}Network ${color DarkSlateGray}${hr 2}${font}
+${color #597DB2}Local IP : ${color grey}${addr wlan0} ${alignr}${color #597DB2}Public IP : ${color grey}${texeci 1800 ~/.conky/externalIp.sh}
+${color #597DB2}Down : ${color grey}${downspeed wlan0}${color #597DB2}${alignr}Total : ${color grey}${totaldown wlan0}
+${color #597DB2}Up     : ${color grey}${upspeed wlan0}${color #597DB2}${alignr}Total : ${color grey}${totalup wlan0}
+
+${font Arial:size=9}${color #e43526}Processes ${color DarkSlateGray}${hr 2}${font}
+${color #597DB2}Processes: ${color grey}$processes  ${alignr}${color #597DB2}Running: ${color grey}$running_processes
+${color #597DB2}CPU Usage ${alignr}PID   CPU%  MEM%
+  ${color grey}${top name 1}${alignr}${top pid 1}  ${top cpu 1}  ${top mem 1} 
+  ${color grey}${top name 2}${alignr}${top pid 2}  ${top cpu 2}  ${top mem 2} 
+  ${color grey}${top name 3}${alignr}${top pid 3}  ${top cpu 3}  ${top mem 3} 
+${color #597DB2}Memory Usage 
+  ${color grey}${top_mem name 1}${alignr}${top_mem pid 1}  ${top_mem cpu 1}  ${top_mem mem 1} 
+  ${color grey}${top_mem name 2}${alignr}${top_mem pid 2}  ${top_mem cpu 2}  ${top_mem mem 2} 
+  ${color grey}${top_mem name 3}${alignr}${top_mem pid 3}  ${top_mem cpu 3}  ${top_mem mem 3} 
+
+${font Arial:size=9}${color #e43526}Weather ${color DarkSlateGray}${hr 2}${font}
+${color grey}${texeci 3600 weather}
+${echo ~/doc/todo.txt}
